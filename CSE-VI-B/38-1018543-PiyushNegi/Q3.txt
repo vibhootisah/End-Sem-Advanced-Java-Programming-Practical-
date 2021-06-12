@@ -1,0 +1,121 @@
+
+ Web.xml
+  <?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>Practical12</display-name>
+  <welcome-file-list>
+     <welcome-file>Input.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+  </welcome-file-list>
+  
+  <filter>
+  		<filter-name>struts2</filter-name>
+  		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  		<filter-name>struts2</filter-name>
+  		<url-pattern>/*</url-pattern>
+  </filter-mapping>
+</web-app>
+ 
+Struts.xml
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+ <struts>
+	<package name="Practical12" extends="struts-default">
+	<action name="empinfo"
+	 class="Practical12.Employee"
+	method="execute">
+			<result name="success">/Result.jsp</result>
+			<result name="input">/Input.jsp</result>
+	</action>
+	</package>
+	
+</struts>
+
+
+
+Employee.java
+ package Practical12;
+
+import com.opensymphony.xwork2.ActionSupport;
+@SuppressWarnings("serial")
+
+public class Employee extends ActionSupport{
+	 private String name;
+	 private int age;
+	 
+	 public String execute() {
+		 return "success";
+	 }
+	 public void validate() {
+		 if(name==null || name.trim().equals("")) {
+			 addFieldError("name","The name is required");
+		 }
+		 if(age<28 || age>65)
+		 {
+			 addFieldError("age","Age must be in between 28 and 65");
+		 }
+	 }
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	 
+	 
+}
+
+Input.jsp
+ <%@ taglib prefix="s" uri="/struts-tags"  %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<s:form action="empinfo" method="post">
+			<s:textfield  name="name" size="20" label="Name"/>
+			<s:textfield  name="age" size="20" label="Age"/>
+			<s:submit name="submit" label="Submit" align="center"/>
+		</s:form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+Result.jsp
+ <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	Employee information is captured successfully.
+</body>
+</html>
+ 
