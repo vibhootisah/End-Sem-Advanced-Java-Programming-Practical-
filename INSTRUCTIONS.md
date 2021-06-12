@@ -1,6 +1,7 @@
 
 **This is END SEM Practical Exam for Advanced JAVA Programming Lab PCS 605**
 
+Write up is from 9-10 am and 10 minutes in addition for uploading your answers.
 A question paper will be uploaded to this repository by 8:55 am, which you need to complete in the following manner -
 
 Firstly, you need to fork this repository so that you can push the changes to your repository and then finally create a pull request to it. NOTE - Don't forget to FORK the repository, otherwise, you will not be able to push the code and make pull requests.
